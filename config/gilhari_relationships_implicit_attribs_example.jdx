@@ -1,0 +1,47 @@
+JDX_DATABASE JDX:jdbc:sqlite:.\config\json_example_relationships_implicit_attribs.db;USER=sa;PASSWORD=sa;JDX_DBTYPE=SQLITE;DEBUG_LEVEL=5;
+JDBC_DRIVER org.sqlite.JDBC
+
+// Please see JDX_DATABASE_JDBC_DRIVER_Specification_Guide (.md or .html) file for 
+// a guide to use different databases (e.g., Postgres or MySQL) in the mapping file.
+
+OBJECT_MODEL_OVERVIEW This object model showcases a JSON object model with two types of objects (A and B) that demonstrate one-to-one relationship using an **implicit attribute** feature such that an attribute of a referenced (contained) object (B) is implicitly initialized by the ORM using a foreign key value derived from the referencing (containing) object (A)
+
+JDX_OBJECT_MODEL_PACKAGE com.softwaretree.jdxjsonimplicitattribsexample.model
+;
+REM ************************************************************************
+
+CLASS .A TABLE A
+
+   // First declare all the persistent JSON properties using VIRTUAL_ATTRIB specifications
+   VIRTUAL_ATTRIB aId ATTRIB_TYPE int
+   VIRTUAL_ATTRIB aString ATTRIB_TYPE java.lang.String
+   VIRTUAL_ATTRIB aBoolean ATTRIB_TYPE boolean
+   VIRTUAL_ATTRIB aFloat ATTRIB_TYPE double
+   VIRTUAL_ATTRIB aDate ATTRIB_TYPE long
+
+   // Now provide the rest of the mapping specification for this class
+   PRIMARY_KEY aId 
+   SQLMAP FOR aDate SQLTYPE DATE
+   // RELATIONSHIP aB REFERENCES .B BYVALUE WITH aId
+   RELATIONSHIP aB REFERENCES .B  BYVALUE REFERENCED_KEY AKEY WITH aId
+;
+
+CLASS .B TABLE B
+
+   // First declare all the persistent JSON properties using VIRTUAL_ATTRIB specifications
+   VIRTUAL_ATTRIB bId ATTRIB_TYPE int
+   VIRTUAL_ATTRIB bInt ATTRIB_TYPE int
+   VIRTUAL_ATTRIB bString ATTRIB_TYPE java.lang.String
+   // VIRTUAL_ATTRIB aId ATTRIB_TYPE int
+   IMPLICIT_ATTRIB aId ATTRIB_TYPE int
+   
+   // Now provide the rest of the mapping specification for this class
+   PRIMARY_KEY bId 
+   REFERENCE_KEY AKEY aId
+;
+
+
+
+
+
+

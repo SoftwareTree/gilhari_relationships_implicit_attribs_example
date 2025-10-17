@@ -1,0 +1,102 @@
+Relationships example:
+
+For GraphQL Semantics:
+
+In the Body of a GET request:
+
+
+// Example 1 (projections) for a query
+
+{
+    "operationDetails": [
+        {
+            "opType": "projections",
+            "projectionsDetails": [
+                                {
+                    "type": "B",
+                    "attribs": [
+                        "bInt",
+                        "bString"
+                    ]
+                },
+                {
+                    "type": "A",
+                    "attribs": [
+                        "aId",
+                        "aString"
+                        
+                    ]
+                }
+            ]
+        }
+    ]
+}
+
+
+// Example 2 (projections) for a query
+
+
+{
+    "operationDetails": [
+        {
+            "opType": "projections",
+            "projectionsDetails": [
+                {
+                    "type": "B",
+                    "attribs": [
+                        "aId",
+                        "bId"
+                    ]
+                },
+                {
+                    "type": "A",
+                    "attribs": [
+                        "aId",
+                        "aString"                     
+                    ]
+                }
+            ]
+        }
+    ]
+}
+
+// Example 3 (projections, ignore, filters) for a deep query
+
+{
+    "operationDetails": [
+        {
+            "opType": "projections",
+            "projectionsDetails": [
+                {
+                    "type": "B",
+                    "attribs": [
+                        "aId",
+                        "bString",
+                        "bInt"
+                    ]
+                },
+                {
+                    "type": "A",
+                    "attribs": [
+                        "aId",
+                        "aString"
+                        
+                    ]
+                }
+            ]
+        },
+        {
+            "opType": "filters",
+            "predicates": [
+                {
+                    "type": "A",
+                    "predicate": "aString > 'aString_0'"
+                },
+                {
+                    "type": "B",
+                    "predicate": "bInt > 100"
+                }
+            ]
+        }
+    ]
+}

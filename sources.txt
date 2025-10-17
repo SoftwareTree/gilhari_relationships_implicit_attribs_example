@@ -1,0 +1,4 @@
+./src/com/softwaretree/jdxjsonimplicitattribsexample/model/A.java
+./src/com/softwaretree/jdxjsonimplicitattribsexample/model/B.java
+
+

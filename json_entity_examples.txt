@@ -1,0 +1,20 @@
+An A object with one B object (aId is an IMPLICIT attribute in the B object referenced by the aB attrubute of A):
+
+{"aId":1,"aString":"aString_1","aBoolean":true,"aFloat":1.1,"aDate":347184000000,"aB":{"bId":100,"bInt":100,"bString":"bString_1"}}
+
+POST body for the above example:
+---------------------------------
+{"entity":{"aId":1,"aString":"aString_1","aBoolean":true,"aFloat":1.1,"aDate":347184000000,"aB":{"bId":100,"bInt":100,"bString":"bString_1"}}}
+
+Curl command for the above example:
+-----------------------------------
+curl -X POST  http://localhost:80/jdx/v1/A
+  -H "Content-Type: application/json"  -H "cache-control: no-cache" -d "{\"entity\":{\"aId\":1,\"aString\":\"aString_1\",\"aBoolean\":true,\"aFloat\":1.1,\"aDate\":347184000000,\"aB\":{\"bId\":100,\"bInt\":100,\"bString\":\"bString_1\"}}}"
+
+
+For GET requet:
+---------------
+
+http://localhost:8081/gilhari/v1/A
+http://localhost:8081/gilhari/v1/A?deep=false
+http://localhost:8081/gilhari/v1/A?filter=jdxObject.aB.bInt=100
