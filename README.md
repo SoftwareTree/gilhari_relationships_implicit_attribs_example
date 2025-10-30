@@ -19,7 +19,8 @@ The example uses the base Gilhari docker image (softwaretree/gilhari) to easily 
 This example can be used **standalone as a RESTful microservice** or optionally with the ORMCP Server.
 
 **Related:**
-- Main ORMCP Server: [https://github.com/SoftwareTree/ormcp-server](https://github.com/SoftwareTree/ormcp-server)
+- **ORMCP Documentation**: [https://github.com/softwaretree/ormcp-docs](https://github.com/softwaretree/ormcp-docs)
+- **ORMCP/Gilhari Examples**: [https://github.com/softwaretree/ormcp-docs#examples](https://github.com/softwaretree/ormcp-docs#examples) - Comprehensive list of examples
 
 **Note:** This example is also included in the Gilhari SDK distribution. If you have the SDK installed, you can use it directly from the `examples/gilhari_relationships_implicit_attribs_example` directory without cloning.
 
@@ -370,6 +371,7 @@ curl -X DELETE "http://localhost:80/gilhari/v1/A?filter=aId=1"
 2. **curlCommandsPopulate.cmd / .sh** - Population with data
 
    Demonstrates:
+   - Sample data population
    - Multiple object creation scenarios
    - A objects with and without B objects
    - Querying to verify implicit attribute population
@@ -408,6 +410,11 @@ This Gilhari microservice can be used with the ORMCP Server for AI-powered datab
 
 The ORMCP Server will automatically handle the implicit attribute behavior when creating objects.
 
+For more information on ORMCP Server:
+- **ORMCP Documentation**: [https://github.com/softwaretree/ormcp-docs](https://github.com/softwaretree/ormcp-docs)
+- **ORMCP/Gilhari Examples**: [https://github.com/softwaretree/ormcp-docs#examples](https://github.com/softwaretree/ormcp-docs#examples)
+- **Product Website**: [https://www.softwaretree.com/products/ormcp/](https://www.softwaretree.com/products/ormcp/)
+
 ## Development Tools
 
 ### Docker Container Access
@@ -434,7 +441,7 @@ docker stop <container-id>
 
 - **JDX User Manual**: "Persisting JSON Objects" section for detailed ORM specification documentation
 - **Gilhari SDK Documentation**: The SDK available for download at [https://softwaretree.com](https://softwaretree.com)
-- **ORMCP Server**: Main repository at [https://github.com/SoftwareTree/ormcp-server](https://github.com/SoftwareTree/ormcp-server)
+- **ORMCP Documentation**: [https://github.com/softwaretree/ormcp-docs](https://github.com/softwaretree/ormcp-docs)
 - **Database Configuration Guide**: See `JDX_DATABASE_JDBC_DRIVER_Specification_Guide.md`
 
 ## Platform Notes
@@ -471,7 +478,7 @@ chmod +x *.sh
 ## Support
 
 For issues or questions:
-- **ORMCP Server issues**: [https://github.com/SoftwareTree/ormcp-server/issues](https://github.com/SoftwareTree/ormcp-server/issues)
+- **ORMCP Documentation & Issues**: [https://github.com/softwaretree/ormcp-docs/issues](https://github.com/softwaretree/ormcp-docs/issues)
 - **This example**: [https://github.com/SoftwareTree/gilhari_relationships_implicit_attribs_example/issues](https://github.com/SoftwareTree/gilhari_relationships_implicit_attribs_example/issues)
 - **Gilhari SDK**: Contact support at [gilhari_support@softwaretree.com](mailto:gilhari_support@softwaretree.com)
 
