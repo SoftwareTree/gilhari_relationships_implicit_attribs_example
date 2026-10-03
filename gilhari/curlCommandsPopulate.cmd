@@ -2,6 +2,8 @@ REM  A script to invoke some sample curl commands on a Windows machine
 REM  against a running container image of the app-specific Gilhari microservice 
 REM  gilhari_relationships_implicit_attribs_example:1.0.
 REM
+REM  This scripts populates some data but does not delete them.
+REM
 REM  The responses are recorded in a log file (curl.log).
 REM
 REM  Note that these curl commands use a default mapped port number of 80
@@ -33,13 +35,26 @@ echo Using PORT number %port% >> curl.log
 echo. >> curl.log
 echo. >> curl.log
 
+REM Check that the Gilhari microservice is up before sending any other requests
+echo ** Check the health of the Gilhari microservice >> curl.log
+curl -fsS "http://localhost:%port%/gilhari/v1/health/check" >> curl.log 2>&1
+if errorlevel 1 (
+    echo. >> curl.log
+    echo The Gilhari microservice is not responding at http://localhost:%port%/gilhari/v1/ >> curl.log
+    echo The Gilhari microservice is not responding at http://localhost:%port%/gilhari/v1/
+    echo Start it first, e.g., gilhari\run_docker_app.cmd, and wait until it is ready.
+    exit /b 1
+)
+echo. >> curl.log
+echo. >> curl.log
+
 echo ** Delete all A objects (and their referenced B objects)  to start fresh >> curl.log
 curl -X DELETE "http://localhost:%port%/gilhari/v1/A" >> curl.log
 echo. >> curl.log
 echo. >> curl.log
 
 echo ** Insert one A object with one referenced B object >> curl.log
-curl -X POST "http://localhost:%port%/gilhari/v1/A"  -H "Content-Type: application/json"  -d "{""entity"":{""aId"":1,""aString"":""aString_1"",""aBoolean"":true,""aFloat"":1.1,""aDate"":347184000001,""aB"":{""bId"":100,""bInt"":100,""bString"":""bString_1""}}}" >> curl.log
+curl -X POST "http://localhost:%port%/gilhari/v1/A"  -H "Content-Type: application/json"  -d "{""entity"":{""aId"":1,""aString"":""aString_1"",""aBoolean"":true,""aFloat"":1.1,""aDate"":347184000001,""aB"":{""bId"":100,""aId"":1,""bInt"":100,""bString"":""bString_1""}}}" >> curl.log
 echo. >> curl.log
 echo. >> curl.log
 
@@ -53,9 +68,8 @@ curl -X GET "http://localhost:%port%/gilhari/v1/A?deep=false"  -H "Content-Type:
 echo. >> curl.log
 echo. >> curl.log
 
-
 echo ** Insert one A object with one referenced B object >> curl.log
-curl -X POST "http://localhost:%port%/gilhari/v1/A"  -H "Content-Type: application/json"  -d "{""entity"":{""aId"":2,""aString"":""aString_2"",""aBoolean"":false,""aFloat"":2.2,""aDate"":347184000002,""aB"":{""bId"":200,""bInt"":200,""bString"":""bString_2""}}}" >> curl.log
+curl -X POST "http://localhost:%port%/gilhari/v1/A"  -H "Content-Type: application/json"  -d "{""entity"":{""aId"":2,""aString"":""aString_2"",""aBoolean"":false,""aFloat"":2.2,""aDate"":347184000002,""aB"":{""bId"":200,""aId"":2,""bInt"":200,""bString"":""bString_2""}}}" >> curl.log
 echo. >> curl.log
 echo. >> curl.log
 
@@ -91,22 +105,6 @@ echo. >> curl.log
 
 echo ** Query all B objects >> curl.log
 curl -X GET "http://localhost:%port%/gilhari/v1/B"  -H "Content-Type: application/json" >> curl.log
-echo. >> curl.log
-echo. >> curl.log
-
-echo ** Delete all B objects >> curl.log
-curl -X DELETE "http://localhost:%port%/gilhari/v1/B" >> curl.log
-echo. >> curl.log
-echo. >> curl.log
-
-echo ** Query the count of B objects >> curl.log
-curl -X GET "http://localhost:%port%/gilhari/v1/B/getAggregate?attribute=bId&aggregateType=COUNT"  -H "Content-Type: application/json" >> curl.log
-echo. >> curl.log
-echo. >> curl.log
-
-
-echo ** Delete all A objects (and their referenced B objects)  >> curl.log
-curl -X DELETE "http://localhost:%port%/gilhari/v1/A" >> curl.log
 echo. >> curl.log
 echo. >> curl.log
 
